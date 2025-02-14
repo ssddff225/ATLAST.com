@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas - Countries, Cities & States</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 12px;
+            font-size: 14px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px;
+            font-size: 18px;
+            background: white;
+            margin: 5px auto;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-items {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Atlas - Countries, Cities & States</h1>
+
+    <div class="buttons-container">
+        <button onclick="filterByLetter('ALL')">All</button>
+        <script>
+            for (let i = 65; i <= 90; i++) {
+                document.write(`<button onclick="filterByLetter('${String.fromCharCode(i)}')">${String.fromCharCode(i)}</button>`);
+            }
+        </script>
+    </div>
+
+    <ul id="items-list"></ul>
+
+    <script>
+        const countries = [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Australia", "Austria", "Azerbaijan",
+            "Bangladesh", "Belgium", "Bolivia", "Brazil", "Bulgaria", "Canada", "China", "Colombia", "Cuba", "Denmark",
+            "Dominican Republic", "Egypt", "Estonia", "Ethiopia", "Finland", "France", "Germany", "Greece", "Hungary",
+            "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Kazakhstan", "Kenya",
+            "Latvia", "Lebanon", "Malaysia", "Mexico", "Morocco", "Nepal", "Netherlands", "New Zealand", "Nigeria",
+            "Norway", "Pakistan", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Saudi Arabia",
+            "Serbia", "Singapore", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Thailand", "Turkey",
+            "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        ];
+
+        const cities = [
+            "Amsterdam", "Athens", "Bangkok", "Barcelona", "Beijing", "Berlin", "Bogotá", "Brussels", "Buenos Aires",
+            "Cairo", "Cape Town", "Chicago", "Delhi", "Dubai", "Dublin", "Frankfurt", "Hong Kong", "Istanbul", "Jakarta",
+            "Kuala Lumpur", "Lisbon", "London", "Los Angeles", "Madrid", "Mexico City", "Miami", "Moscow", "Mumbai",
+            "New York", "Osaka", "Paris", "Rio de Janeiro", "Rome", "San Francisco", "Sao Paulo", "Seoul", "Shanghai",
+            "Singapore", "Sydney", "Tokyo", "Toronto", "Vienna", "Warsaw", "Washington D.C.", "Zurich"
+        ];
+
+        const states = [
+            "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida",
+            "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+            "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska",
+            "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
+            "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas",
+            "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+        ];
+
+        function filterByLetter(letter) {
+            const allItems = [...countries, ...cities, ...states];
+            const filteredItems = letter === "ALL"
+                ? allItems
+                : allItems.filter(item => item.startsWith(letter));
+
+            const itemsList = document.getElementById("items-list");
+            itemsList.innerHTML = "";
+
+            if (filteredItems.length > 0) {
+                filteredItems.forEach(item => {
+                    const li = document.createElement("li");
+                    li.textContent = item;
+                    itemsList.appendChild(li);
+                });
+            } else {
+                itemsList.innerHTML = `<li class="no-items">No items found</li>`;
+            }
+        }
+
+        // Load all items by default
+        filterByLetter("ALL");
+    </script>
+
+</body>
+</html>
